@@ -1,5 +1,5 @@
 /*
-Concepts: Data structure starting with single linked list
+Concepts: Data structure starting with singly linked list
 */
 #include<stdio.h>
 #include<stdlib.h>
