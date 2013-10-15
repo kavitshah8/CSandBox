@@ -18,7 +18,7 @@ ll * insert_in_front(ll *,int);
 ll * delete_from_front(ll *);
 int traverse(ll *);
 
-int main1(){
+int main(){
 
 	int i;
 	// creating a first header pointer (pivot for linked list)
