@@ -34,7 +34,7 @@ int main(){
 	printf("\n");
 
 	// delelting elements from the linked list
-	for(i=0;i<=1;i++){
+	for(i=0;i<=11;i++){
 		head = delete_from_front(head);
 	}
 	
