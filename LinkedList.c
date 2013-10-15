@@ -14,11 +14,11 @@ struct linkedlist{
 };
 
 // declaring functions to manipulate singly linked list 
-ll* insert_in_front(ll *,int);
-ll* delete_in_front(ll *);
-int traverse(ll *head);
+ll * insert_in_front(ll *,int);
+ll * delete_from_front(ll *);
+int traverse(ll *);
 
-int main(){
+int main1(){
 
 	int i;
 	// creating a first header pointer (pivot for linked list)
@@ -35,7 +35,7 @@ int main(){
 
 	// delelting elements from the linked list
 	for(i=0;i<=1;i++){
-		head = delete_in_front(head);
+		head = delete_from_front(head);
 	}
 	
 	// checking elements are deleted properly or not ?
@@ -46,7 +46,7 @@ int main(){
 }
 
 /* Logic for inserting a new node in the front of linked list 
-Step 1: Create a pointer to new block of memory, assign a value using pointer variable
+Step 1: Create a pointer which points to new block of memory; assign a value to structure variable using pointer
 Step 2:	Check base case
 Step 3: Link new node with last node in linked list using header
 Step 4: Redirect header
@@ -72,7 +72,7 @@ Step 3: Redirect new pointer to second last node in linked list using header
 Step 4: Free last node
 Step 5: Redirect header
 */
-ll* delete_in_front(ll *head){
+ll* delete_from_front(ll *head){
 	ll *temp;
 	if(head==NULL){
 		printf("No Elements in the List to Delete\n");
