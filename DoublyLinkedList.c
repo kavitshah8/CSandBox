@@ -7,14 +7,14 @@ Concepts: Data structure starting with doubly linked list
 // defining struct doublylinkedlist as dll
 typedef struct doublylinkedlist dll;
 
-// signly linked list with a pointer and a value 
+// doubly linked list with a pointer and a value 
 struct doublylinkedlist {
 	dll *bwptr;
 	dll *fwptr;
 	int value;
 };
 
-// declaring functions to manipulate singly linked list 
+// declaring functions to manipulate doubly linked list 
 dll * insert_in_front(dll * ,int);
 dll * delete_from_front(dll *);
 int traverse(dll *);
@@ -87,8 +87,7 @@ dll * delete_from_front(dll *head) {
 Step 1:	Check base case
 Step 2: print the value of a node, redirect the head pointer until head points to NULL
 */
-int traverse(dll *head) {
-	
+int traverse(dll *head) {	
 	if(head==NULL){
 		printf("List is empty\n");
 	}
