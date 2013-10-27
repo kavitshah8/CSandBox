@@ -31,11 +31,11 @@ int main(){
 
 node* new_node(int value){
 	node *root;
-	root = malloc(sizeof(node));
+	root = new(node);
 	root->left = NULL;
 	root->right = NULL;
 	root->value = value;
-	return (root);
+	return root	;
 }
 
 node * _insert(node* root, int value){
