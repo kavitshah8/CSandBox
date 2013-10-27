@@ -37,6 +37,9 @@ node* new_node(int value){
 	root->value = value;
 	return root	;
 }
+/*
+Recursive Method to insert new node. 
+*/
 
 node * _insert(node* root, int value){
 			
