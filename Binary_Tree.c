@@ -11,7 +11,7 @@ struct node
 	int publicValue;
 	int privateValue;
 	node *left;
-	node *right	;
+	node *right;
 	node *neighbour;
 	node *parent;
 };
@@ -27,8 +27,8 @@ int main()
 	node *root = NULL;
 	node *newNodePtr = NULL;
 
-	// Inserting a node for the first time, changes the root from NULL to the root of the tree 
-	// root remains constant now onwards
+	/* Inserting a node for the first time, changes the root from NULL to the root of the tree 
+	   Right now, by default the first node is the root of the tree. Root remains constant now onwards*/
 	root = insertNode(root,0,10);
 	
 	for(i=1;i<10;i++)
@@ -50,10 +50,8 @@ node* newNode(int privateValue, int publicValue)
 	newNodePtr ->parent = NULL;
 	return newNodePtr	;
 }
-/*
-Iterative Method to insert new node. 
-*/
 
+//Iterative Method to insert new node. 
 node * insertNode(node* root,int privateValue, int publicValue)
 {
 	node *newNodePtr;
