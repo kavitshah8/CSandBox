@@ -6,51 +6,96 @@ Concepts: Data structure starting with Binary Trees
 
 typedef struct node node;
 
-struct node{
-	int value;
+struct node
+{
+	int publicValue;
+	int privateValue;
 	node *left;
 	node *right	;
+	node *neighbour;
+	node *parent;
 };
 
-node* new_node(int value);
-node * _insert(node *,int);
-node * _delete(node *);
+node* newNode(int,int);
+node * insertNode(node *,int,int);
+node * deleteNode(node *);
 int lookup(node *);
 
-int main(){
-
+int main()
+{
 	int i;
 	node *root = NULL;
-	
-	for(i=0;i<10;i++){
-		root = _insert(root,i);
-	}
+	node *newNodePtr = NULL;
 
+	// Inserting a node for the first time, changes the root from NULL to the root of the tree 
+	// root remains constant now onwards
+	root = insertNode(root,0,10);
+	
+	for(i=1;i<10;i++)
+	{
+		newNodePtr = insertNode(root,i,10);
+	}
 	return 0;
 }
 
-node* new_node(int value){
-	node *root;
-	root = malloc(sizeof(node));
-	root->left = NULL;
-	root->right = NULL;
-	root->value = value;
-	return root	;
+node* newNode(int privateValue, int publicValue)
+{
+	node *newNodePtr;
+	newNodePtr = (node*)malloc(sizeof(node));
+	newNodePtr ->privateValue = privateValue;
+	newNodePtr ->publicValue = publicValue;
+	newNodePtr ->left = NULL;
+	newNodePtr ->right = NULL;
+	newNodePtr ->neighbour = NULL;
+	newNodePtr ->parent = NULL;
+	return newNodePtr	;
 }
 /*
-Recursive Method to insert new node. 
+Iterative Method to insert new node. 
 */
 
-node * _insert(node* root, int value){
-			
-	if(root == NULL){
-		return(new_node(value));	
+node * insertNode(node* root,int privateValue, int publicValue)
+{
+	node *newNodePtr;
+	node *movePtr;
+	node *currentPtr;
+
+	newNodePtr = newNode(privateValue,publicValue);
+
+	if(root == NULL)
+	{
+		return(newNodePtr);	
 	}	
-	else {
-		if(value<= root->value)
-			root->left = _insert(root->left,value);
-		else
-			root->right = _insert(root->right,value);
-	}
-	return root;
+	else
+	{
+		currentPtr = root;
+
+		while(currentPtr != NULL)
+		{
+				if(currentPtr->privateValue > newNodePtr->privateValue )
+				{
+					movePtr = currentPtr->left;
+					if(movePtr == NULL)
+					{
+						//currentPtr->left = newNodePtr;
+						movePtr = newNodePtr;
+						// VERIFY
+						return movePtr;
+					}
+					currentPtr = movePtr; 
+				}
+				else
+				{	
+					movePtr = currentPtr->right;
+					if(movePtr == NULL)
+					{
+						//currentPtr->right = newNodePtr;
+						movePtr = newNodePtr;
+						// VERIFY
+						return movePtr;
+					}
+					currentPtr = movePtr;
+				}
+			}
+		}
 }
