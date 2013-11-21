@@ -20,10 +20,11 @@ node* newNode(int,int);
 node * insertNode(node *,int,int);
 node * deleteNode(node *);
 int lookup(node *);
+int size(node *);
 
 int main()
 {
-	int i;
+	int i,numNodes;
 	node *root = NULL;
 	node *newNodePtr = NULL;
 
@@ -35,6 +36,9 @@ int main()
 	{
 		newNodePtr = insertNode(root,i,10);
 	}
+	numNodes = size(root);
+	printf("Number is nodes in a tree: %d\n",numNodes);
+
 	return 0;
 }
 
@@ -96,4 +100,10 @@ node * insertNode(node* root,int privateValue, int publicValue)
 				}
 			}
 		}
+}
+int size(node *root){
+	if (root==NULL)
+		return 0;
+	else
+		return(size(root->left)+1+size(root->right));
 }
