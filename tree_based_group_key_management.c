@@ -6,13 +6,19 @@ Thesis: Tree based Group Key Management
 #include<stdlib.h>
 #include<math.h>
 
-//Global variables
+/*
+	NODES represents # of intermediate nodes (ie without counting the leaf nodes)
+	HEIGHT represents the height of a tree
+	Binary Tree < = > Number of intermediate nodes = (2^ height of a tree - 1)
+	These two globale variables helps identify the binary tree using above formula
+*/
 extern int NODES;
 extern int HEIGHT;
 
 //Data structure
 typedef struct
 {
+	// unit32_t (needs to figure out)
 	unsigned int publicValue, privateValue, height, depth, type;
 	struct node_t *left;
 	struct node_t *right;
@@ -20,25 +26,51 @@ typedef struct
 	struct node_t *parent;
 }node_t;
 
-
 // Function Prototypes
-void join(node_t **, node_t **);
-node_t * find_sponsor(node_t **);
 node_t * new_node(unsigned int);
-void update_tree(node_t **, node_t **, node_t **, node_t **);
+node_t * find_sponsor(node_t **);
+void join(node_t **, node_t **);
+void update_tree(node_t **, node_t **);//, node_t **, node_t **);
 void update_depth(node_t *);
 
 int main()
 {
 	node_t *root=NULL;
 	node_t *header=NULL;
-	
+	NODES = 0;
+	HEIGHT = 0;
 	join(&root , &header);
-
+	
 	return 0;
 }
+// Checked
+node_t * new_node(unsigned int i)
+{	
+	node_t *temp;
+	temp = (node_t*) malloc(sizeof(node_t));
+	return temp;
+}
+node_t * find_sponsor(node_t ** header)
+{
+	int d;
+	node_t * sponsor;
+	node_t * temp;
+	*temp = (*header);
+	
+	d =0;
 
-
+	while(*temp != NULL)
+	{
+		if((*temp)->depth) <= d)
+		{
+			d = (*temp)->depth;
+			*sponsor = temp;
+		}
+		temp = temp->next;
+	}
+	return sponsor;
+}
+// Checked
 void join(node_t ** root, node_t ** header)
 {
 	node_t *leaf;
@@ -53,21 +85,29 @@ void join(node_t ** root, node_t ** header)
 	}
 	else
 	{
+		/*
 		leaf = new_node(1);
 		node = new_node(0);
-		update_tree(root, header, &node, &leaf);
+		NODES ++;
+		// */
+		update_tree(root, header);//, &node, &leaf);
 	}
 }
-
-void update_tree(node_t **root, node_t **header, node_t **node, node_t **leaf)
+void update_tree(node_t **root, node_t **header)//, node_t **node, node_t **leaf)
 {
 	node_t *sponsor;
+	node_t *temp;
+	node_t *leaf;
+	node_t *node;
+	leaf = new_node(1);
+	node = new_node(0);
+	NODES ++;
 	// BASE CASE
 	if (NODES == 1)
 	{
-		(*node)->left = (*root); 
-		(*node)->right = (*leaf);
-		(*node)->height = 1;
+		(node)->left = &(*root); 
+		(node)->right = (*leaf);
+		(node)->height = 1;
 
 		(*root)->parent = (*node);
 		(*root)->next = (*leaf);
@@ -78,10 +118,10 @@ void update_tree(node_t **root, node_t **header, node_t **node, node_t **leaf)
 		(*leaf)->depth = (*node)->height + 1;
 
 		(*root) = (*node); 
-		NODES ++;
+		
 		HEIGHT++;
 	}
-	else if(NODES = ((int)pow(2,(float)HEIGHT) - 1))
+	else if(NODES == ((int)pow(2,(float)HEIGHT) - 1))
 	{
 		(*node)->left = (*root); 
 		(*node)->right = (*leaf);
@@ -89,7 +129,7 @@ void update_tree(node_t **root, node_t **header, node_t **node, node_t **leaf)
 
 		(*root)->parent = (*node);
 		(*root) = (*node);
-		//depth_update(header);
+		// depth_update(header);
 		//(*root)->next = (*leaf);
 		//(*root)->depth = (*node)->height + 1;
 
@@ -98,31 +138,37 @@ void update_tree(node_t **root, node_t **header, node_t **node, node_t **leaf)
 		(*leaf)->depth = 1;
 
 		sponsor = find_sponsor(header);
-		(*root) = (*node); 
+		(*sponsor)->next = (*leaf);
+
+		
 		NODES ++;
 		HEIGHT++;
 	}
 
-}
-node_t * find_sponsor(node_t ** header)
-{
-	int d;
-	node_t * sponsor;
-	node_t * temp;
-	*temp = (*header);
-	
-	d =0;
-
-	while(*temp !=NULL)
+	else
 	{
-		if((*temp)->depth) <= d)
-		{
-			d = (*temp)->depth;
-			*sponsor = temp;
-		}
-		temp = temp.next;
+		sponsor = find_sponsor(header);
+		(*node)->left = sponsor; 
+		(*node)->right = (*leaf);
+		(*node)->parent = sponsor->parent;
+		(*node)->height = (*root)->height + 1;
+		
+		temp = (*sponsor)->next; 
+ 		(*sponsor)->next = (*leaf);
+		(*sponsor)->parent =(*node);
+		sponsor->depth ++;
+
+		(*leaf)->parent = (*node);
+		(*leaf)->next = temp;
+		(*leaf)->depth = sponsor->depth;
+		
+		NODES ++;
 	}
-	return &sponsor;
+
+}
+void update_depth(node_t *)
+{
+
 }
 
-node_t * new_node(unsigned int);
+
