@@ -23,19 +23,18 @@ struct node_t
 
 // Function Prototypes
 void join(struct node_t **,struct node_t **);
-//struct node_t * find_sponsor(struct node_t **);
 struct node_t * new_node(unsigned int);
 int size(struct node_t *);
-//void update_depth(struct node_t *);
 
 int main()
 {
         struct node_t *root=NULL;
         struct node_t *header=NULL;
+		int i;
         NODES = 0;
 		HEIGHT =0;
-        join(&root , &header);
-		//printf("%d\n",size(root));
+        for(i=0;i<5;i++)
+			join(&root , &header);
         return 0;
 }
 struct node_t * new_node(unsigned int i)
@@ -77,11 +76,11 @@ void join(struct node_t ** root, struct node_t ** header)
 			{
                 (node)->left = (*root);
                 (node)->right = (leaf);
-                //(node)->height = 1;
+				(node)->left->depth = 1;
 
                 (*root)->parent = (node);
                 (*root)->next = (leaf);
-				(*root)->depth = 1;
+				//(*root)->depth = 1;
                 
                 (leaf)->parent = (node);
                 (leaf)->next = NULL;
@@ -118,15 +117,20 @@ void join(struct node_t ** root, struct node_t ** header)
 
 				//sponsor = find_sponsor(header);
 				//Find the sponsor in Balanced Binary case
+				
 				sponsor = *header;
-			    while(sponsor != NULL)
+				/*if(sponsor==NULL)
+				{
+
+				}*/
+				while(sponsor->next != NULL)
 				{
 					sponsor = sponsor->next;
 				}
 				
 				sponsor->next = leaf;
 
-				(*root) = (node);
+				//(*root) = (node);
 
                 HEIGHT++;
 			}
@@ -137,15 +141,16 @@ void join(struct node_t ** root, struct node_t ** header)
 				// To find shallowest right most leaf in tree
 				sponsor = (*header);
 				d = sponsor -> depth;
+				temp = sponsor->next;
 
-		        while(sponsor !=NULL)
+		        while(temp !=NULL)
 				{		
-					if((sponsor)->depth < d)
+					if((temp)->depth <= d)
 					{
-                        d = (sponsor)->depth;
+                        d = (temp)->depth;
                         sponsor = temp;
 					}
-					sponsor = sponsor->next;
+					temp = temp->next;
 				}
 			
 				(node)->left = sponsor;
