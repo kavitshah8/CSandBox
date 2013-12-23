@@ -136,7 +136,7 @@ void join(struct node_t ** root, struct node_t ** header)
 			}
 			
 			else
-			{
+				{
 				//sponsor = find_sponsor(header);
 				// To find shallowest right most leaf in tree
 				sponsor = (*header);
@@ -170,28 +170,6 @@ void join(struct node_t ** root, struct node_t ** header)
 		}
 }
 
-// Finds shallowest rightmost leaf
-/*
-struct node_t * find_sponsor(struct node_t ** header)
-{
-        int d;
-        struct node_t * sponsor,* temp;
-        
-		temp = (*header);
-		d = temp->depth;
-
-        while(temp !=NULL)
-        {		
-                if((temp)->depth < d)
-                {
-                        d = (temp)->depth;
-                        sponsor = temp;
-                }
-                temp = temp->next;
-        }
-        return sponsor;
-}
-*/
 /*
 int size(struct node_t *root){
         if (root==NULL)
