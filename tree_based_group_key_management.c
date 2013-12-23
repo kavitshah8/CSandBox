@@ -33,7 +33,7 @@ int main()
 		int i;
         NODES = 0;
 		HEIGHT =0;
-        for(i=0;i<5;i++)
+        for(i=0;i<4;i++)
 			join(&root , &header);
         return 0;
 }
@@ -136,7 +136,7 @@ void join(struct node_t ** root, struct node_t ** header)
 			}
 			
 			else
-				{
+			{
 				//sponsor = find_sponsor(header);
 				// To find shallowest right most leaf in tree
 				sponsor = (*header);
@@ -160,11 +160,11 @@ void join(struct node_t ** root, struct node_t ** header)
 				
 				sponsor->parent = node;
 				sponsor->next = leaf;
-				//sponsor->depth ++;
+				sponsor->depth ++;
 
 				leaf->next = NULL;
 				leaf->parent = (node);
-				//leaf->depth = sponsor->depth;
+				leaf->depth = sponsor->depth;
 			}
 
 		}
