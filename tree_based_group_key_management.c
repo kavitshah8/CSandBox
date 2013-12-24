@@ -91,7 +91,7 @@ void join(struct node_t ** root, struct node_t ** header)
                 HEIGHT++;
 			}        
 			
-			else if(NODES == ((2^HEIGHT) - 1))
+			else if(NODES == ((1<<HEIGHT) - 1))
 			{
                 //Update Depth of each node
 				temp = *header;
@@ -159,10 +159,11 @@ void join(struct node_t ** root, struct node_t ** header)
 				//(node)->height = 1;
 				
 				sponsor->parent = node;
+				leaf->next = sponsor->next;
 				sponsor->next = leaf;
 				sponsor->depth ++;
 
-				leaf->next = NULL;
+				//leaf->next = NULL;
 				leaf->parent = (node);
 				leaf->depth = sponsor->depth;
 			}
