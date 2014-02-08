@@ -30,6 +30,7 @@ int main()
 
 	/* Inserting a node for the first time, changes the root from NULL to the root of the tree 
 	   Right now, by default the first node is the root of the tree. Root remains constant now onwards*/
+	
 	root = insertNode(root,0,10);
 	
 	for(i=1;i<10;i++)
@@ -79,10 +80,10 @@ node * insertNode(node* root,int privateValue, int publicValue)
 					movePtr = currentPtr->left;
 					if(movePtr == NULL)
 					{
-						//currentPtr->left = newNodePtr;
-						movePtr = newNodePtr;
+						currentPtr->left = newNodePtr;
+						// movePtr = newNodePtr;
 						// VERIFY
-						return movePtr;
+						return newNodePtr;
 					}
 					currentPtr = movePtr; 
 				}
@@ -91,10 +92,10 @@ node * insertNode(node* root,int privateValue, int publicValue)
 					movePtr = currentPtr->right;
 					if(movePtr == NULL)
 					{
-						//currentPtr->right = newNodePtr;
-						movePtr = newNodePtr;
+						currentPtr->right = newNodePtr;
+						// movePtr = newNodePtr;
 						// VERIFY
-						return movePtr;
+						return newNodePtr;
 					}
 					currentPtr = movePtr;
 				}
@@ -102,7 +103,7 @@ node * insertNode(node* root,int privateValue, int publicValue)
 		}
 }
 int size(node *root){
-	if (root==NULL)
+	if (	root==NULL)
 		return 0;
 	else
 		return(size(root->left)+1+size(root->right));
